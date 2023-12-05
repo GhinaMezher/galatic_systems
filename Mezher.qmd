@@ -4,3 +4,25 @@ author: "Ghina Mezher"
 format: html
 ---
 
+Github repository: https://github.com/GhinaMezher/galatic_systems.git
+
+#Dowloading the needed libraries for our lab
+```{r}
+#| message: false
+here::i_am("galatic_systems.Rproj")
+library(here)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(vroom)
+library(knitr)
+```
+
+# Data loading 
+```{r}
+allsystems<-vroom(here("data","allsystems.csv"),delim=":")
+allsystems|>summarise("Data set name"="allsystems.csv" ,"Number of star systems"=n(),
+                      "Number of variables"=ncol(allsystems))|>
+  knitr::kable()
+```
+
