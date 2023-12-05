@@ -18,7 +18,7 @@ library(vroom)
 library(knitr)
 ```
 
-# Data loading 
+# Question 3
 ```{r}
 allsystems<-vroom(here("data","allsystems.csv"),delim=":")
 allsystems|>summarise("Data set name"="allsystems.csv" ,
@@ -27,4 +27,24 @@ allsystems|>summarise("Data set name"="allsystems.csv" ,
                       "Are all numerical?"=all(sapply(allsystems,is.numeric)))|>
   knitr::kable()
 ```
+
+# Question 4
+```{r}
+allsystems_pivot<-sapply(allsystems,as.character)
+allsystems_pivot<-pivot_longer(allsystems_pivot,cols=-c(star_idx,Star_name),names_to="Variable",values_to="Values")
+allsystems|>
+  summarise("nb of observations"=n(),
+  "number of variables"=ncol(allsystems),
+  "missing values"=colSums(is.na(allsystems_pivot)),
+  "missing observations"=rowSums(is.na(allsystems_pivot)))
+```
+## Question 5
+```{r warning=FALSE}
+allsystems|>
+  ggplot(aes(x=`star temperature`,y=`Relative Luminosity`))+
+  geom_line()+
+  geom_rug(alpha=0.1, linewidth=1)+
+  labs(x = "Star Temperature", y = "Star Luminosity", title = "Star luminosity according to its temperature")
+```
+
 
