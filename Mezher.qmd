@@ -47,16 +47,58 @@ allsystems|>
   labs(x = "Star Temperature", y = "Star Luminosity", title = "Star luminosity according to its temperature")
 ```
 # Question 6
+## For the distance
 ```{r}
-extreme_values<-function(df,var1,var2){
-  max<-df|>select(var1,var2)|>
-    slice_max(order_by={{var2}})
-  min<-df|>select(var1,var2)|>slice_min(order_by={{var2}})
-  bind_rows(max,min)
-}
+max_dist<-allsystems|>select(Star_name,DISTANCE)|>
+    slice_max(order_by=DISTANCE)
+min_dist<-allsystems|>select(Star_name,DISTANCE)|>
+    slice_min(order_by=DISTANCE)
 
-allsystems|>extreme_values(Star_name,`star temperature`)
+values<-bind_rows(max_dist,min_dist)
+bind_cols("Extremes"=c("Maximum","Minimum"),values)
 ```
+## For the temperature
+```{r}
+max_temp<-allsystems|>select(Star_name,`star temperature`)|>
+    slice_max(order_by=`star temperature`)
+min_temp<-allsystems|>select(Star_name,`star temperature`)|>
+    slice_min(order_by=`star temperature`)
+
+values<-bind_rows(max_temp,min_temp)
+bind_cols("Extremes"=c("Maximum","Minimum"),values)
+```
+## For the relative mass
+```{r}
+max_mass<-allsystems|>select(Star_name,`RELATIVE MASS`)|>
+    slice_max(order_by=`RELATIVE MASS`)
+min_mass<-allsystems|>select(Star_name,`RELATIVE MASS`)|>
+    slice_min(order_by=`RELATIVE MASS`)
+
+values<-bind_rows(max_mass,min_mass)
+bind_cols("Extremes"=c("Maximum","Minimum"),values)
+```
+##For the star radius
+```{r}
+max_rad<-allsystems|>select(Star_name,`Star Radius`)|>
+    slice_max(order_by=`Star Radius`)
+min_rad<-allsystems|>select(Star_name,`Star Radius`)|>
+    slice_min(order_by=`Star Radius`)
+
+values<-bind_rows(max_rad,min_rad)
+bind_cols("Extremes"=c("Maximum","Minimum"),values)
+```
+
+##For the relative luminosity
+```{r}
+max_lum<-allsystems|>select(Star_name,`Relative Luminosity`)|>
+    slice_max(order_by=`Relative Luminosity`)
+min_lum<-allsystems|>select(Star_name,`Relative Luminosity`)|>
+    slice_min(order_by=`Relative Luminosity`)
+
+values<-bind_rows(max_lum,min_lum)
+bind_cols("Extremes"=c("Maximum","Minimum"),values)
+```
+
 
 # Question 8
 ```{r message=FALSE}
@@ -97,10 +139,17 @@ merged_systems|>group_by(`Name Of The Faction`)|>
 merge_allsystems<-merge(allsystems,Bt_faction_system,by="star_idx")
 merge_allsystems|>filter(FKEY!="A" & FKEY!="I"& FKEY!="U")|>
   ggplot(aes(x=FKEY,y=DISTANCE))+
-  geom_bar(stat="identity",fill="lightpink")+
+  geom_boxplot()+
   theme(axis.text.x=element_text(angle=90,hjust=1))+
   labs(x="faction key",y="Distance from the Sun",title="Distance from the Sun according to system factions")
   
+```
+#Question 13
+```{r}
+merge_allsystems|>
+  filter(FKEY!="A" & FKEY!="I"& FKEY!="U")|>
+  group_by(FKEY)|>
+
 ```
 
 
