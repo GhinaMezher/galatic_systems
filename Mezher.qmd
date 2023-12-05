@@ -58,7 +58,19 @@ extreme_values<-function(df,var1,var2){
 allsystems|>extreme_values(Star_name,`star temperature`)
 ```
 
-# Question 7
+# Question 8
+```{r}
+BT_FACTIONS<-vroom(here("data","BT%FACTIONS.csv"))
+Bt_faction_system<-vroom(here("data","Bt_faction_system.csv"),delim=":")
+```
+# Question 9
+```{r}
+Bt_faction_system|>
+  filter(FKEY %in% c("A","I","U"))|>
+  group_by(FKEY)|>
+  summarise(count=n())
+```
+
 
 
 
