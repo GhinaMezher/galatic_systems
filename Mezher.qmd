@@ -46,5 +46,17 @@ allsystems|>
   geom_rug(alpha=0.1, linewidth=1)+
   labs(x = "Star Temperature", y = "Star Luminosity", title = "Star luminosity according to its temperature")
 ```
+# Question 6
+```{r}
+allsystems|>
+  summarise("extreme values"=c("max","min"),
+            "Distance"=c(max(DISTANCE,na.rm=TRUE),min(DISTANCE,na.rm=TRUE)),
+            "Stellar type"=c(max(`STELLAR CLASS`,na.rm=TRUE),min(`STELLAR CLASS`,na.rm=TRUE)),
+            "Star temperature"=c(max(`star temperature`,na.rm=TRUE),min(`star temperature`,na.rm=TRUE)),
+            "Star Radius"=c(max(`Star Radius`,na.rm=TRUE),min(`Star Radius`,na.rm=TRUE)),
+            "Relative mass"=c(max(`RELATIVE MASS`,na.rm=TRUE),min(`RELATIVE MASS`,na.rm=TRUE)),
+            "Relative luminosity"=c(max(`Relative Luminosity`,na.rm=TRUE),min(`Relative Luminosity`,na.rm=TRUE)))
+```
+
 
 
