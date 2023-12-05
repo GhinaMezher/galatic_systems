@@ -89,10 +89,19 @@ merged_systems|>group_by(`Name Of The Faction`)|>
   ggplot(aes(x=`Name Of The Faction`,y=count))+
   geom_bar(stat="identity",fill="skyblue")+
   theme(axis.text.x=element_text(angle=90,hjust=1))+
-  labs()
+  labs(x="Faction Name",y="Number of Star systems",title="Number of star systems per faction")
 ```
 
 #Question 12
+```{r}
+merge_allsystems<-merge(allsystems,Bt_faction_system,by="star_idx")
+merge_allsystems|>filter(FKEY!="A" & FKEY!="I"& FKEY!="U")|>
+  ggplot(aes(x=FKEY,y=DISTANCE))+
+  geom_bar(stat="identity",fill="lightpink")+
+  theme(axis.text.x=element_text(angle=90,hjust=1))+
+  labs(x="faction key",y="Distance from the Sun",title="Distance from the Sun according to system factions")
+  
+```
 
 
 
