@@ -60,9 +60,9 @@ bind_cols("Extremes"=c("Maximum","Minimum"),values)
 ## For the temperature
 ```{r}
 max_temp<-allsystems|>select(Star_name,`star temperature`)|>
-    slice_max(order_by=`star temperature`)
+    slice_max(order_by=`star temperature`,n=1)
 min_temp<-allsystems|>select(Star_name,`star temperature`)|>
-    slice_min(order_by=`star temperature`)
+    slice_min(order_by=`star temperature`,n=1)
 
 values<-bind_rows(max_temp,min_temp)
 bind_cols("Extremes"=c("Maximum","Minimum"),values)
@@ -70,9 +70,9 @@ bind_cols("Extremes"=c("Maximum","Minimum"),values)
 ## For the relative mass
 ```{r}
 max_mass<-allsystems|>select(Star_name,`RELATIVE MASS`)|>
-    slice_max(order_by=`RELATIVE MASS`)
+    slice_max(order_by=`RELATIVE MASS`,n=1)
 min_mass<-allsystems|>select(Star_name,`RELATIVE MASS`)|>
-    slice_min(order_by=`RELATIVE MASS`)
+    slice_min(order_by=`RELATIVE MASS`,n=1)
 
 values<-bind_rows(max_mass,min_mass)
 bind_cols("Extremes"=c("Maximum","Minimum"),values)
@@ -80,9 +80,9 @@ bind_cols("Extremes"=c("Maximum","Minimum"),values)
 ##For the star radius
 ```{r}
 max_rad<-allsystems|>select(Star_name,`Star Radius`)|>
-    slice_max(order_by=`Star Radius`)
+    slice_max(order_by=`Star Radius`,n=1)
 min_rad<-allsystems|>select(Star_name,`Star Radius`)|>
-    slice_min(order_by=`Star Radius`)
+    slice_min(order_by=`Star Radius`,n=1)
 
 values<-bind_rows(max_rad,min_rad)
 bind_cols("Extremes"=c("Maximum","Minimum"),values)
@@ -91,9 +91,9 @@ bind_cols("Extremes"=c("Maximum","Minimum"),values)
 ##For the relative luminosity
 ```{r}
 max_lum<-allsystems|>select(Star_name,`Relative Luminosity`)|>
-    slice_max(order_by=`Relative Luminosity`)
+    slice_max(order_by=`Relative Luminosity`,n=1)
 min_lum<-allsystems|>select(Star_name,`Relative Luminosity`)|>
-    slice_min(order_by=`Relative Luminosity`)
+    slice_min(order_by=`Relative Luminosity`,n=1)
 
 values<-bind_rows(max_lum,min_lum)
 bind_cols("Extremes"=c("Maximum","Minimum"),values)
