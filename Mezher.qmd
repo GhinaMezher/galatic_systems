@@ -21,8 +21,10 @@ library(knitr)
 # Data loading 
 ```{r}
 allsystems<-vroom(here("data","allsystems.csv"),delim=":")
-allsystems|>summarise("Data set name"="allsystems.csv" ,"Number of star systems"=n(),
-                      "Number of variables"=ncol(allsystems))|>
+allsystems|>summarise("Data set name"="allsystems.csv" ,
+                      "Number of star systems"=n(),
+                      "Number of variables"=ncol(allsystems),
+                      "Are all numerical?"=all(sapply(allsystems,is.numeric)))|>
   knitr::kable()
 ```
 
