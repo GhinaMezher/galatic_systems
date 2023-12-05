@@ -20,7 +20,7 @@ library(knitr)
 
 # Question 3
 ```{r}
-allsystems<-vroom(here("data","allsystems.csv"),delim=":")
+allsystems<-vroom(here("data","allsystems.csv"),delim=":",locale=locale(decimal_mark ="."))
 allsystems|>summarise("Data set name"="allsystems.csv" ,
                       "Number of star systems"=n(),
                       "Number of variables"=ncol(allsystems),
