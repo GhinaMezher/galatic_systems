@@ -59,7 +59,7 @@ allsystems|>extreme_values(Star_name,`star temperature`)
 ```
 
 # Question 8
-```{r}
+```{r message=FALSE}
 BT_FACTIONS<-vroom(here("data","BT%FACTIONS.csv"))
 Bt_faction_system<-vroom(here("data","Bt_faction_system.csv"),delim=":")
 ```
@@ -70,7 +70,29 @@ Bt_faction_system|>
   group_by(FKEY)|>
   summarise(count=n())
 ```
+# Question 10
+```{r}
+tot_systems<-unique(BT_FACTIONS$FKEY)
+included_systems<-unique(Bt_faction_system$FKEY)
 
+not_included_systems<-tot_systems[!(tot_systems%in%included_systems)]
+
+print(length(not_included_systems))
+
+```
+#Question 11
+```{r}
+merged_systems<-merge(Bt_faction_system,BT_FACTIONS,by="FKEY")
+merged_systems|>group_by(`Name Of The Faction`)|>
+  summarise(count=n())|>
+  filter(count>0)|>
+  ggplot(aes(x=`Name Of The Faction`,y=count))+
+  geom_bar(stat="identity",fill="skyblue")+
+  theme(axis.text.x=element_text(angle=90,hjust=1))+
+  labs()
+```
+
+#Question 12
 
 
 
